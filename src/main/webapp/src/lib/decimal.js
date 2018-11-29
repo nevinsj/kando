@@ -3449,13 +3449,14 @@
                     // If n is a number, check if minus zero.
                     n = ( isNum = typeof n == 'number' || toString.call(n) == '[object Number]' ) &&
                         n === 0 && 1 / n < 0 ? '-0' : n + '';
+                    //isNum赋值，看是否为数值,这个判断没有看懂，我理解就是给转换成字符串，包括null  和  undefined
                 }
                 orig = n;
 
                 if ( b == null && isValid.test(n) ) {
 
                     // Determine sign.
-                    x['s'] = n.charCodeAt(0) === 45 ? ( n = n.slice(1), -1 ) : 1;
+                    x['s'] = n.charCodeAt(0) === 45 ? ( n = n.slice(1), -1 ) : 1;//标识符号位
 
                 // Either n is not a valid Decimal or a base has been specified.
                 } else {
@@ -3471,7 +3472,7 @@
 
                     n = trim.call(n).replace( /^\+(?!-)/, '' );
 
-                    x['s'] = n.charCodeAt(0) === 45 ? ( n = n.replace( /^-(?!-)/, '' ), -1 ) : 1;
+                    x['s'] = n.charCodeAt(0) === 45 ? ( n = n.replace( /^-(?!-)/, '' ), -1 ) : 1;//处理符号位
 
                     if ( b != null ) {
 
@@ -3515,13 +3516,13 @@
                             valid = isValid.test(n);
                         }
                     } else {
-                        valid = isValid.test(n);
+                        valid = isValid.test(n);//是否为符号要求的字符
                     }
 
                     if ( !valid ) {
 
                         // Infinity/NaN
-                        x['c'] = x['e'] = null;
+                        x['c'] = x['e'] = null;//对于无效的数据，这两个值赋值为空
 
                         // NaN
                         if ( n != 'Infinity' ) {
